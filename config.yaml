@@ -1,0 +1,14 @@
+---
+inputs:
+  - name: Unfiltered_Input
+  - name: Filtered_Input
+    proxy:
+      - program_change
+      - control_change
+outputs:
+  - name: Unfiltered_Output
+  - name: Filtered_Output
+    proxy:
+      - note_on
+      - note_off
+      - pitch_bend
