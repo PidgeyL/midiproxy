@@ -44,15 +44,24 @@ Since one image speaks louder than a thousand words, this is how the event filte
 
 ## Building
 In order to build the project, first download or `git clone` it, and then:
+### Linux
 ```bash
 cd midiproxy/src
 go mod tidy
 go build -o ../midiproxy main.go
 ```
+### Windows
 If you want to compile it on Windows, you'll need to take a few extra steps. You will need to install portmidi first. You can follow [this tutorial](https://schollz.com/blog/portmidi/).
-I had the issue that the portmidi library wouldn't compile, and `go build` returned the error: `build constraints exclude all Go files in <path to portmidi src files>`. I was able to fix this by enabling the 
+I had the issue that the portmidi library wouldn't compile, and `go build` returned the error: `build constraints exclude all Go files in <path to portmidi src files>`. I was able to fix this by enabling CGO:
 ```powershell
 $env:CGO_ENABLED=1
 ```
 I also had to install `gcc` in the same method as described in the above tutorial.
 Don't forget to add the gcc location to your path file.
+
+If you want to recompile at a later date, don't forget to add your paths before running `go build`:
+```powershell
+$env:CGO_CFLAGS="-IC:\msys64\mingw64\include"
+$env:CGO_LDFLAGS="-LC:\msys64\mingw64\lib"
+```
+Finally, take the same steps as the linux version to compile the binaries.
